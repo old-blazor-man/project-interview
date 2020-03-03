@@ -20,6 +20,10 @@
         download();
     }
 
+    export function setCustomers(records) {
+        customers = records;
+    }
+
  
 </script>
 <table class="table compact">
@@ -45,7 +49,10 @@
                 <td>{user['address']}</td>
                 <td>{user['email']}</td>
                 <td>{user['date_registered']}</td>
-                <td><button on:click="{()=>{user['orderview'] = (user['orderview'] == 0) ? 1 : 0;}}" class="button">View Orders</button></td>
+                <td>
+                    <button on:click="{()=>{user['orderview'] = (user['orderview'] == 0) ? 1 : 0;}}" class="button">View Orders</button>
+                    <button class="button">Edit User</button>
+                </td>
                 
              </tr>
             {#if user['orderview'] == 1}
