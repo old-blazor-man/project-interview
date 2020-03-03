@@ -36,7 +36,9 @@
                 <td>{order_name}</td>
                 <td>{order_total}</td>
                 <td>{order_date}</td>
-                <td><button on:click="{()=>{removeOrder(i)}}">Delete</button></td>
+                <td><button on:click="{()=>{removeOrder(i)}}">Delete</button>
+                    <button>Edit Item</button>
+                </td>
             </tr>
         {/each}
         
