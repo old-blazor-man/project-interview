@@ -6,9 +6,11 @@
   import AppBar from "./components/Header/AppBar.svelte";
   import CustomerOrders from "./components/CustomerOrders.svelte";
   import AddUser from "./components/popUp/AddUser.svelte";
+  import AddOrders from "./components/popUp/AddOrder.svelte";
 
-  let title = "Pandora Store";
+  let title = "Starbucks Store";
   let displayCustomer = false;
+  let displayOrder = false;
   let customer;
   let totalOrders;
   let totalCustomers;
@@ -365,7 +367,7 @@
     </div>
 
     <div class="navview-content h-100">
-       <AppBar on:adduser="{(e) =>{displayCustomer = e.detail;}}" />
+       <AppBar on:addorder="{(e) =>{displayOrder = e.detail;}}" on:adduser="{(e) =>{displayCustomer = e.detail;}}" />
 
         <div id="content-wrapper" class="content-inner h-100" style="overflow-y: auto"><div class="row border-bottom bd-lightGray m-3">
             <div class="cell-md-4 text-center text-left-md">
@@ -386,10 +388,10 @@
     </div>
 
 <div class="row">
-    <div class="cell-lg-3 cell-md-6 mt-2">
+    <div class="cell">
         <TotalOrders bind:this={totalOrders} />
     </div>
-    <div class="cell-lg-3 cell-md-6 mt-2">
+    <div class="cell">
         <TotalCustomers bind:this={totalCustomers} />
     </div>
 </div>
@@ -397,7 +399,7 @@
 
 
 
-    <CustomerOrders bind:this={customer} title="Customer/Orders" />
+    <CustomerOrders on:refresh={handleRefresh} bind:this={customer} title="Customer/Orders" />
 
 </div>
 </div>
@@ -406,4 +408,7 @@
 
 {#if displayCustomer}
      <AddUser on:refresh={handleRefresh} on:close="{(e)=>{displayCustomer = e.detail;}}" />
+{/if}
+{#if displayOrder}
+    <AddOrders on:refresh={handleRefresh} on:close="{(e)=>{displayOrder = e.detail;}}" />
 {/if}

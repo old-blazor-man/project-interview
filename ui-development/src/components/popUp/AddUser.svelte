@@ -4,7 +4,7 @@
     let fname;
     let mname;
     let lname;
-    let email;
+    let em;
     let dob;
     let address;
 
@@ -13,9 +13,11 @@
         form.append("fname", fname);
         form.append("mname", mname);
         form.append("lname", lname);
-        form.append("email", email);
+        form.append("email", em);
         form.append("dob", dob);
         form.append("address", address);
+        console.log(form);
+        console.log(em);
         fetch("/api/v1/add/customer", {
             method: 'post',
             body: form,
@@ -30,12 +32,12 @@
 <style>
     .window{
         position: absolute;
-        width: 300px;
-        height: 350px;
+        width: 600px;
+        height: 640px;
         top: 50%;
         left: 50%;
-        margin-left: -150px;
-        margin-top: -175px;
+        margin-left: -300px;
+        margin-top: -320px;
     }
     .window-content {
         overflow: auto;
@@ -68,13 +70,17 @@
                 <input bind:value={lname} type="text" placeholder="Enter Last Name"/>
                 
             </div>
+
             <div class="form-group">
                 <label>Date Of Birth</label>
-                <input bind:value={dob} type="date" placeholder="Enter DOB"/>
+                <div class="input calendar-picker">
+                      <input bind:value={dob} type="date" placeholder="Enter DOB"/>
+                </div>
+              
             </div>
             <div class="form-group">
                <label>E-mail</label>
-               <input bind:value={email} type="email" placeholder="Enter Email"/>
+               <input bind:value={em} type="email" placeholder="Enter Email"/>
             </div>
             <div class="form-group">
                 <label>Address</label>

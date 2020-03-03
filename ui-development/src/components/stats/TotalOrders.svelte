@@ -13,7 +13,7 @@
         }
     }
     export function refresh(){
-
+        download();
     }
 
 </script>

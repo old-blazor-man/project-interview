@@ -20,7 +20,12 @@
                     
                     </button>
                 </a>
-               
+                <a href="#test" class="app-bar-item">
+                    <button on:click|preventDefault="{()=>{dispatch("addorder", true)}}" class="button primary">
+                        <span class="mif-cart"></span>
+                    </button>
+                </a>
+
                 <div class="app-bar-container">
                     <a href="#t" class="app-bar-item">
                         <img alt="hello" src="https://metroui.org.ua/themes/pandora/images/jek_vorobey.jpg" class="avatar">
