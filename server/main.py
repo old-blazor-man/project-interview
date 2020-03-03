@@ -44,6 +44,34 @@ def get_all_customers():
     #Return JSON...
     return jsonify(customers)
 
+# MODULE: get ALL customers from database
+@app.route('/api/v1/update/customer', methods=['POST'])
+def update_customer():
+    if request.method == "POST":
+        #Logic To connect to database 
+        #Open Cursor to perform database operation
+        conn = psycopg2.connect("dbname=store user=postgres password=J1sth3b3st")
+        fname = request.form['fname']
+        mname = request.form['mname']
+        lname = request.form['lname']
+        email = request.form['email']
+        address = request.form['address']
+        dob = request.form['dob']
+        customerid = request.form['customerid']
+        cursor = conn.cursor(cursor_factory=RealDictCursor) #Here is where explicit tell the cursor how to handle return of the databse..
+        cursor.execute("""UPDATE info.customers SET first_name = %s, 
+        middle_name = %s,last_name = %s, dob = %s, address = %s, email = %s
+        WHERE customerid = %s""", (fname, mname, lname, dob, address, email, customerid,))
+
+        #Commit to the change...
+        conn.commit()
+        
+        #Close db and cursor
+        cursor.close()
+        conn.close()
+        #Return JSON...
+        return jsonify({"success": True})
+
 # MODULE: GET ONLY CUSTOMERS THAT HAVE ORDERS...
 @app.route('/api/v1/customers/orders', methods=['GET'])
 def customers_orders():
@@ -58,6 +86,7 @@ def customers_orders():
             	'middle_name', cus.middle_name,
                 'last_name', cus.last_name,
                 'email', cus.email,
+                'address', cus.address,
                 'dob', cus.dob,
             	'date_registered', cus.date_registered,
                 'orderview', 0,

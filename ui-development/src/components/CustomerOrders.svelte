@@ -30,7 +30,7 @@
 </script>
 <div class="panel mt4" >
         <div class="panel-content" >
-            <Table on:refresh on:results={handleResults} bind:this={table} /> 
+            <Table on:edit on:refresh on:results={handleResults} bind:this={table} /> 
         </div>
         <div class="panel-title">
             

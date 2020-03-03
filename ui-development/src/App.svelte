@@ -7,20 +7,33 @@
   import CustomerOrders from "./components/CustomerOrders.svelte";
   import AddUser from "./components/popUp/AddUser.svelte";
   import AddOrders from "./components/popUp/AddOrder.svelte";
+  import EditItem from "./components/popUp/EditItem.svelte";
+  import EditUser from "./components/popUp/EditUser.svelte";
+
 
   let title = "Starbucks Store";
   let displayCustomer = false;
   let displayOrder = false;
+  let displayEditItem = false;
+  let displayEditUser = false;
+
   let customer;
   let totalOrders;
   let totalCustomers;
+  let user;
 
   function handleRefresh() {
       displayCustomer = false;
+      displayEditUser = false;
       customer.refresh();
       totalOrders.refresh();
       totalCustomers.refresh();
 
+  }
+
+  function handleEditUser(e) {
+      displayEditUser = true;
+      user = e.detail;
   }
 
 </script>
@@ -395,20 +408,21 @@
         <TotalCustomers bind:this={totalCustomers} />
     </div>
 </div>
-
-
-
-
-    <CustomerOrders on:refresh={handleRefresh} bind:this={customer} title="Customer/Orders" />
+    <CustomerOrders on:edit="{handleEditUser}" on:refresh={handleRefresh} bind:this={customer} title="Customer/Orders" />
 
 </div>
 </div>
     </div>
 </div>
 
+
+
 {#if displayCustomer}
      <AddUser on:refresh={handleRefresh} on:close="{(e)=>{displayCustomer = e.detail;}}" />
-{/if}
-{#if displayOrder}
-    <AddOrders on:refresh={handleRefresh} on:close="{(e)=>{displayOrder = e.detail;}}" />
+{:else if  displayOrder}
+      <AddOrders on:refresh={handleRefresh} on:close="{(e)=>{displayOrder = e.detail;}}" />
+{:else if displayEditItem}
+    <EditItem />
+{:else if displayEditUser}
+    <EditUser on:refresh={handleRefresh} on:close="{(e)=>{displayEditUser = e.detail}}" {user} />
 {/if}

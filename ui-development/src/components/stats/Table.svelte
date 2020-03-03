@@ -51,7 +51,7 @@
                 <td>{user['date_registered']}</td>
                 <td>
                     <button on:click="{()=>{user['orderview'] = (user['orderview'] == 0) ? 1 : 0;}}" class="button">View Orders</button>
-                    <button class="button">Edit User</button>
+                    <button on:click="{()=>{dispatch("edit", user)}}" class="button">Edit User</button>
                 </td>
                 
              </tr>
