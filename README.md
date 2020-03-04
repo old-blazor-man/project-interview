@@ -1,4 +1,9 @@
+# Publish Project
+3-2-2020 Completed Demo.
+
 # Author Contact
+
+
 My name is Hector Chapa.
 
 You can reach me at roensebastian2015@gmail.com for any 
