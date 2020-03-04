@@ -4,9 +4,7 @@
     const dispatch = createEventDispatcher();
     
     function removeOrder(index) {
-        
-       // console.log(orders[index]);
-
+  
         var form = new FormData();
         form.append("orderid", orders[index]['orderid']);
         
@@ -30,15 +28,15 @@
         </tr>
     </thead>
     <tbody>
-        {#each orders as {order_name, order_total, order_date}, i}
+        {#each orders as  order, i}
              <tr >
                 <td>{(i + 1)}</td>
-                <td>{order_name}</td>
-                <td>{order_total}</td>
-                <td>{order_date}</td>
+                <td>{order['order_name']}</td>
+                <td>{order['order_total']}</td>
+                <td>{order['order_date']}</td>
                 <td>
                     <button class="button" on:click="{()=>{removeOrder(i)}}">Delete</button>
-                    <button class="button" on:click="{()=>{}}">Edit Item</button>
+                    <button class="button" on:click="{()=>{dispatch('eitem',order)}}">Edit Item</button>
                 </td>
             </tr>
         {/each}

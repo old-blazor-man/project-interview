@@ -1,9 +1,11 @@
 <script>
     //This Component handles all the total customers 
     //Display Quick Stats..
-    import {onMount} from "svelte";
+    import {onMount, createEventDispatcher} from "svelte";
 
     let total = 0;
+    
+    const dispatch = createEventDispatcher();
     onMount( ()=>{
         download();
         
@@ -30,5 +32,5 @@
             <div class="icon">
                <span class="mif-user-check"></span>
             </div>
-            <a href="#test" class="more"> More info <span class="mif-arrow-right"></span></a>
+            <a on:click|preventDefault="{()=>{dispatch('customers',true)}}" href="#test" class="more"> More info <span class="mif-arrow-right"></span></a>
 </div>

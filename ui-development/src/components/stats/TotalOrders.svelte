@@ -8,7 +8,7 @@
         const response = await fetch("/api/v1/total/orders/Year");
         const results = await response.json();
         if(results){
-            console.log(results);
+          
             total = results['total']
         }
     }

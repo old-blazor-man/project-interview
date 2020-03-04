@@ -8,11 +8,12 @@
         download();
     })
     async function download() {
-        const response = await fetch("/api/v1/customers/orders");
+        const response = await fetch("/api/v1/customers");
         const results = await response.json();
         if(results){
            
             customers = results;
+            
             dispatch("results", results);
         }
     }
@@ -22,6 +23,22 @@
 
     export function setCustomers(records) {
         customers = records;
+    }
+
+    function handlePrompt(user) {
+        let response = confirm('Are you sure?');
+        if(response) {
+            var form = new FormData();
+            form.append("customerid", user['customerid']);
+        
+            fetch("/api/v1/delete/customer",{
+            method: 'post',
+            body: form,
+        }).then((response) =>{
+                download();
+                dispatch("refresh");
+            });
+        }
     }
 
  
@@ -40,7 +57,7 @@
     </tr>
     </thead>
     <tbody>
-        {#each customers as {user}, i}
+        {#each customers as user, i}
              <tr>
                 <td>{(i + 1)}</td>
                 <td>{user['first_name']}</td>
@@ -50,18 +67,11 @@
                 <td>{user['email']}</td>
                 <td>{user['date_registered']}</td>
                 <td>
-                    <button on:click="{()=>{user['orderview'] = (user['orderview'] == 0) ? 1 : 0;}}" class="button">View Orders</button>
+                    <button on:click="{()=>{handlePrompt(user)}}" class="button alert">Delete User</button>
                     <button on:click="{()=>{dispatch("edit", user)}}" class="button">Edit User</button>
                 </td>
                 
              </tr>
-            {#if user['orderview'] == 1}
-              <tr>
-                <td>
-                    <TableOrders on:eitem on:refresh orders={user['orders']} />
-                </td> 
-              </tr>
-            {/if}
         {/each}
     </tbody>
 </table>

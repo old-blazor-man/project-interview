@@ -4,6 +4,11 @@
     const dispatch = createEventDispatcher();
 
  </script>
+ <style>
+    button{
+        border: 1px solid white;
+    }
+ </style>
  <div  class="pos-absolute bg-darkCyan fg-white app-bar" >
             <button type="button" class="hamburger menu-down hidden" style="display: none;">
             <span class="line"></span><span class="line"></span>
@@ -29,12 +34,12 @@
                 <div class="app-bar-container">
                     <a href="#t" class="app-bar-item">
                         <img alt="hello" src="https://metroui.org.ua/themes/pandora/images/jek_vorobey.jpg" class="avatar">
-                        <span class="ml-2 app-bar-name">Jack Sparrow</span>
+                        <span class="ml-2 app-bar-name">Hector Chapa</span>
                     </a>
                     <div class="user-block shadow-1" data-role="collapse" data-collapsed="true" data-role-collapse="true" style="display: none;">
                         <div class="bg-darkCyan fg-white p-2 text-center">
                             <img alt="" src="https://metroui.org.ua/themes/pandora/images/jek_vorobey.jpg" class="avatar">
-                            <div class="h4 mb-0">Jack Sparrow</div>
+                            <div class="h4 mb-0">Hector Chapa</div>
                             <div>Pirate captain</div>
                         </div>
                     </div>

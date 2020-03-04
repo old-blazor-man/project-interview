@@ -136,7 +136,20 @@ def add_customer():
     #Return JSON...
     return jsonify({"success": True})
 
-
+# MODULE: DEL ORDER ID FROM THE DB..
+@app.route('/api/v1/delete/customer', methods=['POST'])
+def del_customer():
+    if request.method == 'POST':
+        customerid = request.form['customerid']
+        conn = psycopg2.connect("dbname=store user=postgres password=J1sth3b3st")
+        cursor = conn.cursor() #Here is where explicit tell the cursor how to handle return of the databse..
+        cursor.execute("""DELETE FROM info.customers WHERE customerid = %s""", (customerid,))
+        #Commit to the changes 
+        conn.commit()
+        #Close db and cursor
+        cursor.close()
+        conn.close()
+        return jsonify({"success": True})
 
 
 #MODULE: GET TOTAL CUSTOMERS
@@ -192,7 +205,7 @@ def get_total_OrdewrsByYear():
     #In this case get only the first row since there is only one row to return
     return jsonify(customers[0])
 
-# MODULE: ADD NEW CUSTOMER INTO DB..
+# MODULE: ADD NEW ORDERS TO CUSTOMER INTO DB..
 @app.route('/api/v1/add/orders', methods=['POST'])
 def add_orders():
     if request.method == 'POST':
@@ -207,6 +220,31 @@ def add_orders():
         #Close db and cursor
         cursor.close()
         conn.close()
+        return jsonify({"success": True})
+
+# MODULE: UPDATE SINGLE ORDER FROM DATABASE..
+@app.route('/api/v1/update/order', methods=['POST'])
+def update_order():
+    if request.method == "POST":
+        #Logic To connect to database 
+        #Open Cursor to perform database operation
+        conn = psycopg2.connect("dbname=store user=postgres password=J1sth3b3st")
+        oname = request.form['oname']
+        ototal = request.form['ototal']
+        odate = request.form['odate']
+        orderid = request.form['orderid']
+       
+        cursor = conn.cursor(cursor_factory=RealDictCursor) #Here is where explicit tell the cursor how to handle return of the databse..
+        cursor.execute("""UPDATE info.orders SET order_name = %s, 
+        order_total = %s,order_date = %s WHERE orderid = %s""", (oname, ototal, odate, orderid,))
+
+        #Commit to the change...
+        conn.commit()
+        
+        #Close db and cursor
+        cursor.close()
+        conn.close()
+        #Return JSON...
         return jsonify({"success": True})
 
 # MODULE: DEL ORDER ID FROM THE DB..

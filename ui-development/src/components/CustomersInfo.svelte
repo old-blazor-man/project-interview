@@ -1,5 +1,5 @@
 <script>
-    import Table from "./stats/Table.svelte";
+    import TableCustomers from "./stats/TableCustomers.svelte";
     export let title = "TEST";
     let table;
     let results;
@@ -11,21 +11,21 @@
         results = e.detail;
     }
     function handleKeyDown(e) {
-        //console.log(e);
+       
         //On Enter Search the information...
         //Get the html element so we can get the value...
         var input = e.target || e.srcElement;
         if(e.keyCode == 13){
-            console.log(results);
+            
             var value = input.value.toLowerCase();
-            console.log(value);
+         
             const nwresults = results.filter(customer => 
-            customer['user']['first_name'].toLowerCase().includes(value) 
-            || customer['user']['last_name'].toLowerCase().includes(value) ||
-               customer['user']['email'].toLowerCase().includes(value)
-               || customer['user']['address'].toLowerCase().includes(value)
-               || customer['user']['dob'].toLowerCase().includes(value)
-               || customer['user']['date_registered'].toLowerCase().includes(value)
+            customer['first_name'].toLowerCase().includes(value) 
+            || customer['last_name'].toLowerCase().includes(value) ||
+               customer['email'].toLowerCase().includes(value)
+               || customer['address'].toLowerCase().includes(value)
+               || customer['dob'].toLowerCase().includes(value)
+               || customer['date_registered'].toLowerCase().includes(value)
             );
 
             table.setCustomers(nwresults);
@@ -37,7 +37,7 @@
 </script>
 <div class="panel mt4" >
         <div class="panel-content" >
-            <Table on:edit on:eitem on:refresh on:results={handleResults} bind:this={table} /> 
+            <TableCustomers on:edit on:eitem on:refresh on:results={handleResults} bind:this={table} /> 
         </div>
         <div class="panel-title">
             
