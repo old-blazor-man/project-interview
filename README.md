@@ -27,5 +27,35 @@ This project is aim towards my interview with Hidalgo county Information Technol
 Once installed open terminal cd into this folder and run npm install to get the dependecies. After that you can try npm run dev or npm run build.
 
 4.) Folder Documentation: This folder contains some videos and GIF of how this software looks like.
+
+# GIF IMAGE
 <img src="https://github.com/lrgvdc9-1-1/project-interview/blob/master/documentation/gui_one.gif" >
+
+# VIDEOS DEMONSTRATION OF SOFTWARE..
+
+<video width="320" height="240" controls>
+  <source src="https://github.com/lrgvdc9-1-1/project-interview/blob/master/documentation/add-customer.mp4" type="video/mp4">
+  
+  Your browser does not support the video tag.
+</video>
+
+
+<video width="320" height="240" controls>
+  <source src="https://github.com/lrgvdc9-1-1/project-interview/blob/master/documentation/add-orders2.mp4" type="video/mp4">
+  
+  Your browser does not support the video tag.
+</video>
+
+
+<video width="320" height="240" controls>
+  <source src="https://github.com/lrgvdc9-1-1/project-interview/blob/master/documentation/search-customers.mp4" type="video/mp4">
+  
+  Your browser does not support the video tag.
+</video>
+
+<video width="320" height="240" controls>
+  <source src="https://github.com/lrgvdc9-1-1/project-interview/blob/master/documentation/writing-code-preview.mp4" type="video/mp4">
+  
+  Your browser does not support the video tag.
+</video>
 
