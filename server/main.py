@@ -74,7 +74,7 @@ def update_customer():
 
 # MODULE: GET ONLY CUSTOMERS THAT HAVE ORDERS...
 @app.route('/api/v1/customers/orders', methods=['GET'])
-def customers_orders():
+def customers_and_orders():
     #Logic To connect to database 
     #Open Cursor to perform database operation
     conn = psycopg2.connect("dbname=store user=postgres password=J1sth3b3st")
@@ -170,6 +170,22 @@ def get_total_Customers():
     return jsonify(customers[0])
 
 
+
+# MODULE: GET ALL ORDERS from database
+@app.route('/api/v1/orders', methods=['GET'])
+def get_all_orders():
+    #Logic To connect to database 
+    #Open Cursor to perform database operation
+    conn = psycopg2.connect("dbname=store user=postgres password=J1sth3b3st")
+    cursor = conn.cursor(cursor_factory=RealDictCursor) #Here is where explicit tell the cursor how to handle return of the databse..
+    cursor.execute("SELECT * FROM info.orders")
+    customers = cursor.fetchall() #get all records
+
+    #Close db and cursor
+    cursor.close()
+    conn.close()
+    #Return JSON...
+    return jsonify(customers)
 
 #MODULE: GET TOTAL ORDERS
 @app.route('/api/v1/total/orders', methods=['GET'])

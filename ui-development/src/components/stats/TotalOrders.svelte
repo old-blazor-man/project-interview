@@ -1,6 +1,7 @@
 <script>
-    import {onMount} from "svelte";
+    import {onMount, createEventDispatcher} from "svelte";
     let total = 0;
+    const dispatch = createEventDispatcher();
     onMount(()=>{
         download();
     });
@@ -25,5 +26,5 @@
             <div class="icon">
                 <span class="mif-cart"></span>
             </div>
-            <a href="#Hello" class="more"> More info <span class="mif-arrow-right"></span></a>
+            <a  on:click|preventDefault="{()=>{dispatch('orders',true)}}" href="#Hello" class="more"> More info <span class="mif-arrow-right"></span></a>
 </div>

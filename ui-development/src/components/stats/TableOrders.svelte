@@ -4,8 +4,9 @@
     const dispatch = createEventDispatcher();
     
     function removeOrder(index) {
-  
-        var form = new FormData();
+        var response = confirm("Are You Sure?")
+        if(response) {
+            var form = new FormData();
         form.append("orderid", orders[index]['orderid']);
         
         fetch("/api/v1/delete/order", {
@@ -14,6 +15,9 @@
         }).then(()=>{
             dispatch("refresh");
         });
+
+        }
+        
        
     }
 </script>

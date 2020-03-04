@@ -6,6 +6,7 @@
   import AppBar from "./components/Header/AppBar.svelte";
   import CustomerOrders from "./components/CustomerOrders.svelte";
   import CustomersInfo from "./components/CustomersInfo.svelte";
+  import Orders from "./components/Orders.svelte";
   import AddUser from "./components/popUp/AddUser.svelte";
   import AddOrders from "./components/popUp/AddOrder.svelte";
   import EditItem from "./components/popUp/EditItem.svelte";
@@ -18,6 +19,7 @@
   let displayEditItem = false;
   let displayEditUser = false;
   let viewCustomers = false;
+  let viewOrders = false;
 
   let customer;
   let totalOrders;
@@ -49,6 +51,10 @@
 
   }
 
+  function handleOrders(e){
+      viewOrders = e.detail;
+  }
+
 </script>
 <div data-role="navview" data-toggle="#paneToggle" data-expanded="xl" data-compact="lg" data-active-state="true" class="navview compact-lg expanded-xl" data-role-navview="true">
     <div class="navview-pane">
@@ -71,10 +77,7 @@
         </div>
 
         
-        <div class="w-100 text-center text-small data-box p-2 border-top bd-grayMouse" style="position: absolute; bottom: 0">
-            <div>© 2019 <a href="mailto:sergey@pimenov.com.ua" class="text-muted fg-white-hover no-decor">Sergey Pimenov</a></div>
-            <div>Created with <a href="https://metroui.org.ua" class="text-muted fg-white-hover no-decor">Metro 4</a></div>
-        </div>
+       
     </div>
 
     <div class="navview-content h-100">
@@ -100,7 +103,7 @@
 
 <div class="row">
     <div class="cell">
-        <TotalOrders bind:this={totalOrders} />
+        <TotalOrders on:orders={handleOrders} bind:this={totalOrders} />
     </div>
     <div class="cell">
         <TotalCustomers on:customers={handleCustomers} bind:this={totalCustomers} />
@@ -108,9 +111,13 @@
 </div>
     {#if viewCustomers}
          <CustomersInfo on:edit="{handleEditUser}" on:refresh={handleRefresh} title="Customers" bind:this={customer} />
+    {:else if viewOrders}
+        <Orders on:refresh={handleRefresh} on:eitem={handleEditItem} title="Orders" bind:this={customer}  />
     {:else}
         <CustomerOrders on:edit="{handleEditUser}" on:eitem={handleEditItem} on:refresh={handleRefresh} bind:this={customer} title="Customer/Orders" />
     {/if}
+
+   
     
 </div>
 </div>
