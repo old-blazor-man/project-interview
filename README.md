@@ -16,6 +16,8 @@ This project is aim towards my interview with Hidalgo county Information Technol
 
 4.) Back End Database PostgresSQL
 
+5.) Node JS - For Svelte
+
 # Folder BreakDowns
 1.) Folder Server: contains everything you need to run the application once you install the on the modules for python as well setup postgresql database.
 
