@@ -11,7 +11,10 @@
         const response = await fetch("/api/v1/customers");
         const results = await response.json();
         if(results){
-           
+            results.forEach(user => {
+                user['dob'] = formatDate(user['dob']);
+                user['date_registered'] = formatDate(user['date_registered']);
+            });
             customers = results;
             
             dispatch("results", results);
@@ -39,6 +42,16 @@
                 dispatch("refresh");
             });
         }
+    }
+
+    function formatDate(date){
+        var dte = new Date(Date.parse(date));
+        dte.setDate(dte.getDate() + 1);
+        var year = dte.getFullYear();
+        var month = (dte.getMonth() + 1 < 10) ? `0${dte.getMonth() + 1}` : dte.getMonth() + 1;
+        var day = (dte.getDate() < 10) ? `0${dte.getDate()}` : dte.getDate();
+
+        return `${year}-${month}-${day}`;
     }
 
  

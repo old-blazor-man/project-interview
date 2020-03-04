@@ -107,7 +107,7 @@
     </div>
 </div>
     {#if viewCustomers}
-         <CustomersInfo on:refresh={handleRefresh} title="Customers" bind:this={customer} />
+         <CustomersInfo on:edit="{handleEditUser}" on:refresh={handleRefresh} title="Customers" bind:this={customer} />
     {:else}
         <CustomerOrders on:edit="{handleEditUser}" on:eitem={handleEditItem} on:refresh={handleRefresh} bind:this={customer} title="Customer/Orders" />
     {/if}
